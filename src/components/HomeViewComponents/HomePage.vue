@@ -1,5 +1,12 @@
 <template>
-  <div class="hello">
+  <div class='home_main_div'>
+    <div class="container home_main_div__wrapper">
+      <div class="form-control">
+        <label for="text"><input id="textHome" type="text"></label>
+      </div>
+      <button class="btn">Добавить</button>
+      <hr />
+    </div>
   </div>
 </template>
 
@@ -10,7 +17,11 @@ export default defineComponent({
   name: 'HomePage',
   props: {
     msg: String,
-    ggg: String,
+  },
+  data() {
+    return {
+      counter: 0,
+    };
   },
 });
 </script>

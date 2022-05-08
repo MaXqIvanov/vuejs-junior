@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import '../scss/home.scss';
 import HomePage from '@/components/HomeViewComponents/HomePage.vue'; // @ is an alias to /src
 
 export default defineComponent({
