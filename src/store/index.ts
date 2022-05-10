@@ -1,7 +1,9 @@
 import { createStore } from 'vuex';
+import HomeModule from './HomeModule';
 
 export default createStore({
   state: {
+    anyNum: 0,
   },
   getters: {
   },
@@ -10,5 +12,6 @@ export default createStore({
   actions: {
   },
   modules: {
+    home: HomeModule,
   },
 });

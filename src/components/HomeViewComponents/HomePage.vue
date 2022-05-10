@@ -5,9 +5,9 @@
         <label for="text"><input v-model="inputValue" id="textHome" type="text" /></label>
       </div>
       <button @click="addElem" class="btn">Добавить</button>
-      <div class="block_arrayMessage" v-if="arrayMessage.length !== 0">
-        <ul class="list" :key="elem.message" v-for="(elem, index) in arrayMessage">
-          <li class="list-item">{{ elem.message }} <button @click="removeElem(index)" type="button"
+      <div class="block_arrayMessage" v-if="$store.state.home.posts.length !== 0">
+        <ul class="list" :key="elem.body" v-for="(elem, index) in $store.state.home.posts">
+          <li class="list-item">{{ elem.body }} <button @click="removeElem(index)" type="button"
               class="btn btn-outline-info">x</button></li>
         </ul>
       </div>
@@ -21,6 +21,7 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default defineComponent({
   name: 'HomePage',
@@ -34,6 +35,11 @@ export default defineComponent({
     };
   },
   methods: {
+    ...mapMutations({
+    }),
+    ...mapActions({
+      actionGetPosts: 'home/actionGetPosts',
+    }),
     addElem() {
       if (this.inputValue !== '') {
         this.arrayMessage = [...this.arrayMessage,
@@ -51,6 +57,9 @@ export default defineComponent({
         this.inputValue = '';
       }
     },
+  },
+  mounted() {
+    this.actionGetPosts();
   },
 });
 </script>
