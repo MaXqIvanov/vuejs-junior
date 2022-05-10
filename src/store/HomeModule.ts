@@ -3,12 +3,25 @@ import axios from 'axios';
 export default {
   state: {
     posts: [],
+    limitPosts: [],
+    page: 1,
+    limit: 10,
   },
   getters: {
   },
   mutations: {
     updatePosts(state:any, data:any) {
       state.posts = data;
+      state.limit = data.length / 10;
+    },
+    updateLimimPosts(state:any, data:any) {
+      state.limitPosts = state.posts.slice((state.page - 1) * 10, state.page * 10);
+    },
+    changePage(state:any, data:any) {
+      if (data <= state.limit && data > 0) {
+        state.page = data;
+        state.limitPosts = state.posts.slice((data - 1) * 10, data * 10);
+      }
     },
   },
   actions: {
@@ -16,9 +29,8 @@ export default {
       commit,
     }:any) {
       axios.get('https://jsonplaceholder.typicode.com/posts').then((response) => {
-        // console.log(response.data, this)
-        console.log(response);
         commit('updatePosts', response.data);
+        commit('updateLimimPosts', response.data);
       });
     },
   },
