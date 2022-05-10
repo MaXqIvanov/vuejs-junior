@@ -24,14 +24,16 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item">
-            <div class="page-link" @keydown="enter" @click="changePage(page - 1)">Previous</div>
+            <div class="page-link" @keydown="changePage(page - 1)"
+            @click="changePage(page - 1)">Previous</div>
           </li>
           <ul :key="elem" v-for="(elem) in limit">
-          <li class="page-item"><div class="page-link pagination_elem" @keydown="enter"
+          <li class="page-item"><div class="page-link pagination_elem" @keydown="changePage(elem)"
           @click="changePage(elem)">{{ elem }}</div></li>
           </ul>
           <li class="page-item">
-            <div class="page-link" @keydown="enter" @click="changePage(page + 1)">Next</div>
+            <div class="page-link" @keydown="changePage(page + 1)"
+            @click="changePage(page + 1)">Next</div>
           </li>
         </ul>
        </nav>

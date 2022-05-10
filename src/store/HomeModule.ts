@@ -23,6 +23,9 @@ export default {
         state.limitPosts = state.posts.slice((data - 1) * 10, data * 10);
       }
     },
+    searchPosts(state:any, data:any) {
+      state.limitPosts = data;
+    },
   },
   actions: {
     actionGetPosts({
