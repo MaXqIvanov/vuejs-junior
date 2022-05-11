@@ -18,7 +18,9 @@
              <div class="text_elem_title"><div class="id_elem_home">{{ elem.id }}</div>
              {{ elem.title }}</div>
             <div class="text_elem_body">{{ elem.body }}</div>
-          <!-- <div class="custom_style_btn_home"></div> -->
+          <div @click="updatefavoritesPosts(elem)"
+          @keydown="updatefavoritesPosts(elem)"
+          class="custom_style_btn_home"></div>
               </li>
         </ul>
       </div>
@@ -64,6 +66,7 @@ export default defineComponent({
     ...mapMutations({
       changePage: 'home/changePage',
       searchPosts: 'home/searchPosts',
+      updatefavoritesPosts: 'home/updatefavoritesPosts',
     }),
     ...mapActions({
       actionGetPosts: 'home/actionGetPosts',
@@ -71,13 +74,14 @@ export default defineComponent({
   },
   watch: {
     inputValue(value) {
-      if (value.length > 30) {
+      if (value.length > 200) {
         this.inputValue = '';
       }
     },
   },
   mounted() {
     this.actionGetPosts();
+    // this.getFavoritesPosts();
   },
   computed: mapState({
     allPosts: (state:any) => state.home.limitPosts,
