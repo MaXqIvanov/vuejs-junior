@@ -18,9 +18,10 @@
              <div class="text_elem_title"><div class="id_elem_home">{{ elem.id }}</div>
              {{ elem.title }}</div>
             <div class="text_elem_body">{{ elem.body }}</div>
-          <div @click="updatefavoritesPosts(elem)"
-          @keydown="updatefavoritesPosts(elem)"
-          class="custom_style_btn_home"></div>
+          <div v-if="isContain(elem.id)" @click="deletefavoritesPosts(elem)"
+          @keydown="deletefavoritesPosts(elem)" class="custom_style_btn_home_active"></div>
+          <div v-else class="custom_style_btn_home" @click="updatefavoritesPosts(elem)"
+          @keydown="updatefavoritesPosts(elem)"></div>
               </li>
         </ul>
       </div>
@@ -29,8 +30,8 @@
       </div>
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <div class="page-link" @keydown="changePage(page - 1)"
+          <li class="page-item not_mobile">
+            <div class="page-link not_mobile" @keydown="changePage(page - 1)"
             @click="changePage(page - 1)">Previous</div>
           </li>
           <ul :key="elem" v-for="(elem) in limit">
@@ -38,7 +39,7 @@
           @click="changePage(elem)">{{ elem }}</div></li>
           </ul>
           <li class="page-item">
-            <div class="page-link" @keydown="changePage(page + 1)"
+            <div class="page-link not_mobile" @keydown="changePage(page + 1)"
             @click="changePage(page + 1)">Next</div>
           </li>
         </ul>
@@ -67,10 +68,17 @@ export default defineComponent({
       changePage: 'home/changePage',
       searchPosts: 'home/searchPosts',
       updatefavoritesPosts: 'home/updatefavoritesPosts',
+      deletefavoritesPosts: 'home/deletefavoritesPosts',
     }),
     ...mapActions({
       actionGetPosts: 'home/actionGetPosts',
     }),
+    isContain(data:any) {
+      const isCheck = this.favoritesPosts.filter((elem:any) => elem.id === data);
+      if (isCheck.length > 0) {
+        return true;
+      } return false;
+    },
   },
   watch: {
     inputValue(value) {
@@ -85,6 +93,7 @@ export default defineComponent({
   },
   computed: mapState({
     allPosts: (state:any) => state.home.limitPosts,
+    favoritesPosts: (state:any) => state.home.favoritesPosts,
     limit: (state:any) => state.home.limit,
     page: (state:any) => state.home.page,
   }),

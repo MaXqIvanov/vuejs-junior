@@ -1,3 +1,8 @@
+.not_mobile{
+    @media(max-width: 600px){
+        display: none !important;
+    }
+}
 .home_main_div{
     height: 100%;
     width: 100%;
@@ -19,10 +24,14 @@
 .temp_post_one{
     width: 100%;
     position: relative;
-    box-shadow: black 0px 0px 1px;
+    box-shadow: black 0px 0px 2px;
     box-sizing: border-box;
     display: grid;
     grid-template-rows: 20px auto;
+
+    @media(max-width: 600px){
+        box-shadow: black 0px 0px 5px; 
+    }
 }
 .list-item{
     padding: 0;
@@ -44,10 +53,29 @@
         opacity: 80%;
     }
 }
+.custom_style_btn_home_active{
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    border-radius: 50px;
+    background-image: url('../assets/starsGold.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 80%;
+    cursor: pointer;
+    &:hover{
+        opacity: 100%;
+    }
+}
 .text_elem_body{
     margin-left: 10px;
     width: 90%;
     text-align: left;
+    @media(max-width: 600px){
+        width: calc((100%) - 10px);
+    }
 }
 .text_elem_title{
     margin-left: 10px;
@@ -69,6 +97,9 @@
 }
 .page-link{
     cursor: pointer;
+    @media(max-width: 400px){
+        padding: 0.085rem 0.62rem !important;
+    }
 }
 .form_button_home{
     width: 100%;
@@ -77,7 +108,7 @@
     justify-content: center;
 }
 .custom_button_search{
-    width: 10%;
+    width: 25px;
     height: 25px;
     background-image: url('../assets/search.svg');
     background-repeat: no-repeat;

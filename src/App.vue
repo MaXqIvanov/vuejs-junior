@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="navigation_main">
     <div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -37,7 +37,13 @@
   color: #2c3e50;
   font-family: 'Montserrat', sans-serif;
 }
-
+.navigation_main {
+  min-width: 300px !important;
+  @media(max-width: 400px){
+    padding: 0;
+    padding-bottom: 15px;
+  }
+}
 nav {
   padding: 30px;
 

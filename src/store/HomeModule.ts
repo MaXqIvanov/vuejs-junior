@@ -60,6 +60,11 @@ export default {
     },
     updatefavoritesPosts(state:any, data:any) {
       localStorage.setItem(`FP${data.id}`, JSON.stringify(data));
+      state.favoritesPosts = [...state.favoritesPosts, data];
+    },
+    deletefavoritesPosts(state:any, data:any) {
+      localStorage.removeItem(`FP${data.id}`);
+      state.favoritesPosts = state.favoritesPosts.filter((elem:any) => elem.id !== data.id);
     },
   },
   actions: {
