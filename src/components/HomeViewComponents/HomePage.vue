@@ -1,20 +1,24 @@
 <template>
   <div class="home_main_div">
     <div class="container home_main_div__wrapper">
-      <div class="form-control">
-        <label class="custom_input_home" for="text"><input class="form-control form-control-sm"
-        type="text" placeholder="Поиск..."
-        aria-label=".form-control-sm example"
-        v-model="inputValue" id="textHome" /></label>
+      <div class="form_button_home">
+        <div class="form-control">
+          <label class="custom_input_home" for="text"><input class="form-control form-control-sm"
+          type="text" placeholder="Поиск..."
+          aria-label=".form-control-sm example"
+          v-model="inputValue" id="textHome" /></label>
+        </div>
+        <div @click="searchPosts(inputValue)"
+        @keydown="searchPosts(inputValue)"
+        class="custom_button_search"></div>
       </div>
-      <button class="btn btn-outline-info">Поиск</button>
       <div class="block_arrayMessage" v-if="allPosts.length !== 0">
         <ul class="list" :key="elem.body" v-for="(elem) in allPosts">
           <li class="list-item temp_post_one">
              <div class="text_elem_title"><div class="id_elem_home">{{ elem.id }}</div>
              {{ elem.title }}</div>
             <div class="text_elem_body">{{ elem.body }}</div>
-          <div class="custom_style_btn_home"></div>
+          <!-- <div class="custom_style_btn_home"></div> -->
               </li>
         </ul>
       </div>
@@ -59,6 +63,7 @@ export default defineComponent({
   methods: {
     ...mapMutations({
       changePage: 'home/changePage',
+      searchPosts: 'home/searchPosts',
     }),
     ...mapActions({
       actionGetPosts: 'home/actionGetPosts',

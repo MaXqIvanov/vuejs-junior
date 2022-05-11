@@ -70,3 +70,19 @@
 .page-link{
     cursor: pointer;
 }
+.form_button_home{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom_button_search{
+    width: 10%;
+    height: 25px;
+    background-image: url('../assets/search.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    margin-left: 5px;
+
+}
