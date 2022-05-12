@@ -117,3 +117,15 @@
     margin-left: 5px;
 
 }
+.sorting_block{
+    display: flex;
+    justify-content: center;
+
+    .sorting_id{
+
+        cursor: pointer;
+    }
+    .sorting_alpha{
+        margin-left: 20px;
+    }
+}

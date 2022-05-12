@@ -12,6 +12,20 @@
         @keydown="searchPosts(inputValue)"
         class="custom_button_search"></div>
       </div>
+      <div class="sorting_block">
+        <div class="form-check form-switch sorting_id">
+            <label  class="form-check-label" for="flexSwitchCheckDefault">
+              <input class="form-check-input" aria-checked="true"
+              type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            Сортировка по ID</label>
+        </div>
+          <div class="form-check form-switch sorting_alpha">
+            <label  class="form-check-label" for="flexSwitchCheckDefault">
+              <input class="form-check-input" aria-checked="true"
+              type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            Сортировка по алфавиту</label>
+        </div>
+      </div>
       <div class="block_arrayMessage" v-if="allPosts.length !== 0">
         <ul class="list" :key="elem.body" v-for="(elem) in allPosts">
           <li class="list-item temp_post_one">

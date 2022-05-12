@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import FavoriteModule from './FavoriteModule';
 import HomeModule from './HomeModule';
 
 export default createStore({
@@ -12,5 +13,6 @@ export default createStore({
   },
   modules: {
     home: HomeModule,
+    favorite: FavoriteModule,
   },
 });
