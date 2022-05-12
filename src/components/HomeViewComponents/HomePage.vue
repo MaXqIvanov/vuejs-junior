@@ -17,7 +17,7 @@
             <label  class="form-check-label" for="flexSwitchCheckID">
               <input class="form-check-input" aria-checked="true"
               v-model="checkedId" @change="updateLimimPosts({ checkedId, checkedAlpha })"
-              type="checkbox" role="switch" id="flexSwitchCheckID">
+              type="checkbox" role="switch" id="flexSwitchCheckID" :value="checkedId">
               Сортировка по ID</label>
         </div>
           <div class="form-check form-switch sorting_alpha">

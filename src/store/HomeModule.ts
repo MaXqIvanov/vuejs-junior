@@ -60,7 +60,6 @@ export default {
       }
     },
     searchPosts(state:any, data:any) {
-      console.log(data.length);
       state.page = 1;
       if (data.length > 20 && data.length <= 100) {
         state.limitPosts = state.posts.filter((elem:any) => stringSimilarity
