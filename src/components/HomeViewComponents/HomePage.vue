@@ -14,15 +14,17 @@
       </div>
       <div class="sorting_block">
         <div class="form-check form-switch sorting_id">
-            <label  class="form-check-label" for="flexSwitchCheckDefault">
+            <label  class="form-check-label" for="flexSwitchCheckID">
               <input class="form-check-input" aria-checked="true"
-              type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            Сортировка по ID</label>
+              v-model="checkedId" @change="updateLimimPosts({ checkedId, checkedAlpha })"
+              type="checkbox" role="switch" id="flexSwitchCheckID">
+              Сортировка по ID</label>
         </div>
           <div class="form-check form-switch sorting_alpha">
-            <label  class="form-check-label" for="flexSwitchCheckDefault">
+            <label  class="form-check-label" for="flexSwitchCheckAlpha">
               <input class="form-check-input" aria-checked="true"
-              type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              v-model="checkedAlpha" @change="updateLimimPosts({ checkedId, checkedAlpha })"
+              type="checkbox" role="switch" id="flexSwitchCheckAlpha">
             Сортировка по алфавиту</label>
         </div>
       </div>
@@ -49,7 +51,11 @@
             @click="changePage(page - 1)">Previous</div>
           </li>
           <ul :key="elem" v-for="(elem) in limit">
-          <li class="page-item"><div class="page-link pagination_elem" @keydown="changePage(elem)"
+          <li v-if="elem !== page" class="page-item"><div class="page-link pagination_elem"
+          @keydown="changePage(elem)"
+          @click="changePage(elem)">{{ elem }}</div></li>
+          <li v-else class="page-item active"><div class="page-link pagination_elem"
+          @keydown="changePage(elem)"
           @click="changePage(elem)">{{ elem }}</div></li>
           </ul>
           <li class="page-item">
@@ -75,6 +81,8 @@ export default defineComponent({
   data() {
     return {
       inputValue: '',
+      checkedId: false,
+      checkedAlpha: false,
     };
   },
   methods: {
@@ -83,6 +91,7 @@ export default defineComponent({
       searchPosts: 'home/searchPosts',
       updatefavoritesPosts: 'home/updatefavoritesPosts',
       deletefavoritesPosts: 'home/deletefavoritesPosts',
+      updateLimimPosts: 'home/updateLimimPosts',
     }),
     ...mapActions({
       actionGetPosts: 'home/actionGetPosts',

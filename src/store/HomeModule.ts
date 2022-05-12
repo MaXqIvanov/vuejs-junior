@@ -1,6 +1,10 @@
 import axios from 'axios';
 import stringSimilarity from 'string-similarity';
 
+function SortArray(x:any, y:any) {
+  return x.title.localeCompare(y.title);
+}
+
 export default {
   state: {
     posts: [],
@@ -18,7 +22,29 @@ export default {
       state.limit = Math.ceil(data.length / 10);
     },
     updateLimimPosts(state:any, data:any) {
-      state.limitPosts = state.posts.slice((state.page - 1) * 10, state.page * 10);
+      if (state.searchPosts.length < 100 && (state.searchPosts.length > 0)) {
+        if (data.checkedId === true && data.checkedAlpha === true) {
+          state.searchPosts = state.searchPosts.sort(SortArray);
+        } else if (data.checkedId === true && data.checkedAlpha === false) {
+          state.searchPosts = state.searchPosts.sort((a:any, b:any) => b.id - a.id);
+        } else if (data.checkedId === false && data.checkedAlpha === true) {
+          state.searchPosts = state.searchPosts.sort(SortArray);
+        } else {
+          state.searchPosts = state.searchPosts.sort((a:any, b:any) => a.id - b.id);
+        }
+        state.limitPosts = state.searchPosts.slice((state.page - 1) * 10, state.page * 10);
+      } else {
+        if (data.checkedId === true && data.checkedAlpha === true) {
+          state.posts = state.posts.sort(SortArray);
+        } else if (data.checkedId === true && data.checkedAlpha === false) {
+          state.posts = state.posts.sort((a:any, b:any) => b.id - a.id);
+        } else if (data.checkedId === false && data.checkedAlpha === true) {
+          state.posts = state.posts.sort(SortArray);
+        } else {
+          state.posts = state.posts.sort((a:any, b:any) => a.id - b.id);
+        }
+        state.limitPosts = state.posts.slice((state.page - 1) * 10, state.page * 10);
+      }
       const key = Object.keys(localStorage).filter((elem:any) => elem.includes('FP') === true);
       state.favoritesPosts = key.map((elem:any) => ((localStorage.getItem(elem)
       != null) ? JSON.parse(String(localStorage.getItem(elem))) : ''));
@@ -53,6 +79,7 @@ export default {
         state.limit = Math.ceil(state.limitPosts.length / 10);
         state.limitPosts = state.limitPosts.slice((state.page - 1) * 10, state.page * 10);
       } if (data.length === 0) {
+        state.searchPosts = [];
         state.limitPosts = state.posts.slice((state.page - 1) * 10, state.page * 10);
         state.limit = Math.ceil(state.posts.length / 10);
       }
